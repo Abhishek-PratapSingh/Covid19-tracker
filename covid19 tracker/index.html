@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid 19</title>
+    <style>
+       *{
+           margin: 0px;
+    
+       }
+       body{
+           text-align: center;
+           font-family: 'Times New Roman', Times, serif;
+       }
+       .box{
+           margin: 10px 10px;
+           border: 5px solid rgba(88, 82, 82, 0.158);
+           background:linear-gradient(rgba(89, 57, 179, 0.39),white);
+       }
+      h1{
+           font-size: 60px ;
+           padding: 50px 0px;
+       }
+       h2{
+        font-size: 40px ;
+        padding:30px 30px;
+       }
+       .content{
+           font-size: 30px;
+       }
+       .regards{
+           font-family: cursive;
+           font-size: 40px;
+           text-align: center;
+           color: cyan;
+       }
+      #guidelines{
+          font-size: large;
+          padding-bottom: 30px;
+      }
+
+    </style>
+</head>
+<body>
+    
+      <div class="box">
+          <h1>INDIA</h1>
+          <hr>
+          <h2>Covid Cases <img src="https://img.icons8.com/color/96/000000/coronavirus--v1.png"/></h2>
+          <br>
+          <hr>
+          <br>
+          <div class="content">
+           <div id="date"> </div> 
+           <br>
+           <hr>
+           <br>
+
+          <div id="newcases"> </div>
+          <br>
+          <hr>
+          <br>
+          <div id="newdeaths">  </div>
+          <br>
+          <hr>
+          <br>
+          <div id="newrecovered"> </div>
+          <br>
+        
+        <div class="regards">
+            <p>Stay Safe & Stay Secure</p>
+        </div>
+        <img src="256px.png" alt="">
+
+        <p id="guidelines">To Know more about WHO guidelines: <a href="https://www.who.int/publications/i/item/WHO-2019-nCoV-therapeutics-2021.2">Click Here</a></p>
+      </div>
+
+    <script>
+
+        fetch("https://api.covid19api.com/summary")
+        .then((data)=>{
+          return data.json();
+        })
+        .then((actualdata)=>{
+            console.log(actualdata.Countries[76]);
+
+            var date=actualdata.Countries[76].Date;
+           
+            var cases=actualdata.Countries[76].NewConfirmed;
+            var deaths =actualdata.Countries[76].NewDeaths;
+            var recov=actualdata.Countries[76].NewRecovered;
+
+             date = date.fontcolor("blue");
+             recov=recov.toString();
+             deaths=deaths.toString();
+             cases=cases.toString();
+             recov = recov.fontcolor("green");
+             deaths = deaths.fontcolor("red");
+            
+            document.getElementById('date').innerHTML=`Date & Time: ${date}`;
+            document.getElementById('newcases').innerHTML= `New Cases: ${cases}`;
+            document.getElementById('newdeaths').innerHTML= `New Deaths: ${deaths}`;
+            document.getElementById('newrecovered').innerHTML=`New Recovered: ${recov}`;
+
+        })
+        .catch((error)=>{
+         console.log(error);
+        });
+    </script>
+</body>
+</html>
